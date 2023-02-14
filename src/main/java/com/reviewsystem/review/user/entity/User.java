@@ -1,11 +1,8 @@
 package com.reviewsystem.review.user.entity;
 
 import com.reviewsystem.review.global.Entity.RootEntity;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
-import org.springframework.data.annotation.Id;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -13,6 +10,8 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Getter
+@ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User extends RootEntity {
     @Id
@@ -43,13 +42,20 @@ public class User extends RootEntity {
     @Enumerated(EnumType.STRING)
     private OauthType oauthType = OauthType.NONE;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Customer customer;
-
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Irumi irumi;
-
     public enum OauthType {
         NONE, KAKAO
+    }
+
+    @Builder
+    public User(String email, String password, String phone,
+                String state, String city, Boolean serviceAgreement,
+                Boolean personalDataAgreement, Boolean marketingAgreement,
+                OauthType oauthType) {
+        this.email = email;
+        this.password = password;
+        this.phone = phone;
+        this.agreement = new Agreement(serviceAgreement, personalDataAgreement, marketingAgreement);
+        this.address = new Address(state, city);
+        this.oauthType = oauthType;
     }
 }
