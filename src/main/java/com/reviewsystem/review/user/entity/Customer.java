@@ -1,6 +1,6 @@
 package com.reviewsystem.review.user.entity;
 
-import com.reviewsystem.review.global.Entity.RootEntity;
+import com.reviewsystem.review.global.Entity.BaseEntity;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
@@ -11,7 +11,7 @@ import javax.persistence.*;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Customer extends RootEntity {
+public class Customer extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

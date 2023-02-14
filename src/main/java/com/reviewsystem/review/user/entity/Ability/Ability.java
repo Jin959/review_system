@@ -1,6 +1,6 @@
 package com.reviewsystem.review.user.entity.Ability;
 
-import com.reviewsystem.review.global.Entity.RootEntity;
+import com.reviewsystem.review.global.Entity.BaseEntity;
 import lombok.Getter;
 import org.hibernate.annotations.ColumnDefault;
 
@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
 
 @Getter
 @MappedSuperclass
-public class Ability extends RootEntity {
+public class Ability extends BaseEntity {
 
     @Size(max = 20)
     private String categoryBig;

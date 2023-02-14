@@ -1,6 +1,6 @@
 package com.reviewsystem.review.user.entity;
 
-import com.reviewsystem.review.global.Entity.RootEntity;
+import com.reviewsystem.review.global.Entity.BaseEntity;
 import com.reviewsystem.review.user.entity.Ability.ProgramSkill;
 import com.reviewsystem.review.user.entity.Ability.SoftSkill;
 import com.reviewsystem.review.user.entity.Ability.TaskField;
@@ -17,7 +17,7 @@ import java.util.List;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Irumi extends RootEntity {
+public class Irumi extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

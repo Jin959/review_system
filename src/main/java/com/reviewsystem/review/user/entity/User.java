@@ -1,6 +1,6 @@
 package com.reviewsystem.review.user.entity;
 
-import com.reviewsystem.review.global.Entity.RootEntity;
+import com.reviewsystem.review.global.Entity.BaseEntity;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
@@ -13,7 +13,7 @@ import javax.validation.constraints.Size;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class User extends RootEntity {
+public class User extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

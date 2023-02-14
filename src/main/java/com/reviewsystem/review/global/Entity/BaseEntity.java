@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @MappedSuperclass
-public class RootEntity {
+public class BaseEntity {
     @CreationTimestamp
     @NotNull
     private LocalDateTime createTime;
