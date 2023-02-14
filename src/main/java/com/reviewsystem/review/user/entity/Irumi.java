@@ -1,15 +1,17 @@
 package com.reviewsystem.review.user.entity;
 
 import com.reviewsystem.review.global.Entity.BaseEntity;
-import com.reviewsystem.review.user.entity.Ability.ProgramSkill;
-import com.reviewsystem.review.user.entity.Ability.SoftSkill;
-import com.reviewsystem.review.user.entity.Ability.TaskField;
-import com.reviewsystem.review.user.entity.Ability.TaskSkill;
+import com.reviewsystem.review.matching.entity.IrumiMatchingMapping;
+import com.reviewsystem.review.user.entity.ability.ProgramSkill;
+import com.reviewsystem.review.user.entity.ability.SoftSkill;
+import com.reviewsystem.review.user.entity.ability.TaskField;
+import com.reviewsystem.review.user.entity.ability.TaskSkill;
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -53,24 +55,28 @@ public class Irumi extends BaseEntity {
 
     @OneToMany(mappedBy = "irumi", cascade = CascadeType.ALL)
     @ToString.Exclude
-    private List<TaskField> taskFieldList;
+    private List<TaskField> taskFieldList = new ArrayList<>();
 
     @OneToMany(mappedBy = "irumi", cascade = CascadeType.ALL)
     @ToString.Exclude
-    private List<TaskSkill> taskSkillList;
+    private List<TaskSkill> taskSkillList = new ArrayList<>();
 
     @OneToMany(mappedBy = "irumi", cascade = CascadeType.ALL)
     @ToString.Exclude
-    private List<SoftSkill> softSkillList;
+    private List<SoftSkill> softSkillList = new ArrayList<>();
 
     @OneToMany(mappedBy = "irumi", cascade = CascadeType.ALL)
     @ToString.Exclude
-    private List<ProgramSkill> programSkillList;
+    private List<ProgramSkill> programSkillList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "irumi", cascade = CascadeType.ALL)
+    @ToString.Exclude
+    private List<IrumiMatchingMapping> irumiMatchingMappingList = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
     private IrumiEducationState irumiEducationState = IrumiEducationState.UNTAKEN;
 
-    private enum IrumiEducationState {
+    public enum IrumiEducationState {
         UNTAKEN, TAKEN
     }
 

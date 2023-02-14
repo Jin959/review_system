@@ -1,4 +1,4 @@
-package com.reviewsystem.review.user.entity.Ability;
+package com.reviewsystem.review.user.entity.ability;
 
 import com.reviewsystem.review.user.entity.Irumi;
 import lombok.*;
@@ -19,4 +19,10 @@ public class TaskSkill extends Ability {
     @JoinColumn(name = "irumi_id")
     @ToString.Exclude
     private Irumi irumi;
+
+    @Builder
+    public TaskSkill(String categoryBig, String categorySmall, Integer rating, Irumi irumi) {
+        super(categoryBig, categorySmall, rating);
+        this.irumi = irumi;
+    }
 }

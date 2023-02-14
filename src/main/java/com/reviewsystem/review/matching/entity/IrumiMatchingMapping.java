@@ -1,5 +1,6 @@
-package com.reviewsystem.review.user.entity.ability;
+package com.reviewsystem.review.matching.entity;
 
+import com.reviewsystem.review.global.Entity.BaseEntity;
 import com.reviewsystem.review.user.entity.Irumi;
 import lombok.*;
 
@@ -10,7 +11,7 @@ import javax.persistence.*;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class SoftSkill extends Ability {
+public class IrumiMatchingMapping extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,9 +21,14 @@ public class SoftSkill extends Ability {
     @ToString.Exclude
     private Irumi irumi;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "matching_id")
+    @ToString.Exclude
+    private TaskMatching taskMatching;
+
     @Builder
-    public SoftSkill(String categoryBig, String categorySmall, Integer rating, Irumi irumi) {
-        super(categoryBig, categorySmall, rating);
+    public IrumiMatchingMapping(Irumi irumi, TaskMatching taskMatching) {
         this.irumi = irumi;
+        this.taskMatching = taskMatching;
     }
 }

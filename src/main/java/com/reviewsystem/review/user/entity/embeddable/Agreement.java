@@ -1,4 +1,4 @@
-package com.reviewsystem.review.user.entity;
+package com.reviewsystem.review.user.entity.embeddable;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

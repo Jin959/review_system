@@ -12,11 +12,11 @@
 
 ## ToC
 
-- [ERD 설계](.#erd-설계)
-- [Entity 설계](.#entity-설계)
-- [Project 구조](.#project-구조)
-- [환경 설정](.#환경-설정)
-- [API Doc](.#api-doc)
+- [ERD 설계](#erd-설계)
+- [Entity 설계](#entity-설계)
+- [Project 구조](#project-구조)
+- [환경 설정](#환경-설정)
+- [API Doc](#api-doc)
 
 ---
 
@@ -60,7 +60,7 @@
   - TASK_MATCHING : IRUMI = N:M
 
   - JPA 엔터티 설계를 고려하여 매핑 테이블을 둔다.
-  - TASK_MATCHING : IRUMI_MATCHING_MAPPING : IRUMI 1:N:1
+  - TASK_MATCHING : IRUMI_MATCHING_MAPPING : IRUMI = 1:N:1
 
 
 ### REVIEW
@@ -89,22 +89,37 @@
 
 - `User` 엔터티는 `Irumi`, `Customer`와 `OneToOne` 매핑했다.
 
-- 연관 되는 필드를 묶어 `@Embeddable` 인 Address, Agreement 를 만들어 사용했다.
+- 연관 되는 필드를 묶어 `@Embeddable` 인 [Address](./blob/main/src/main/java/com/reviewsystem/review/user/entity/Address.java), [Agreement](./blob/main/src/main/java/com/reviewsystem/review/user/entity/Agreement.java) 를 만들어 사용했다.
 
 ### Irumi
 
 - `Irumi` 는 `TaskField`, `TaskSkill`, `SoftSkill`, `ProgramSkill` 네가지 역량과 `OneToOne` 매핑했다.
 
+- [네가지 역량 들](./tree/main/src/main/java/com/reviewsystem/review/user/entity/Ability)은 같은 필드를 갖는다. 그 것들을 모아 놓은 [Ability](./blob/main/src/main/java/com/reviewsystem/review/user/entity/Ability/Ability.java)를 상속받는다.
+
 ### Customer
 
-- 고객은 리뷰를 작성할 수 있는 매칭 목록과 작성한 리뷰 목록을 볼 수 있어야 한다. 
+- 고객은 리뷰를 작성할 수 있는 매칭 목록과 작성한 리뷰 목록을 볼 수 있어야 한다.
+  - `Customer` 에서도 참조할 수 있게 양방향 매핑
   - `TaskMatching` 과 `OneToMany` 매핑을 둔다.
 
 ### TaskMatching
 
+- `Irumi`와 매핑 테이블을 두고 N:M 관계를 갖는다.
+
+- `Customer` 와
+
+- 필요 역량들과 `OneToMany` 연관 관계
+
+- `Review` 와 `OneToOne` 연관 관계
+
+  - 고객과 이루미 모두 `TaskMatching` -> `Review` 를 찾아볼 일이 존재하므로 양방향
+
 ### Review
 
 - 매칭 상태가 완료 된 상태에서만 고객이 이루미에게 리뷰를 남길 수 있다.
+
+- `TaskMatching` 과 `OneToOne` 연관 관계
 
 ---
 

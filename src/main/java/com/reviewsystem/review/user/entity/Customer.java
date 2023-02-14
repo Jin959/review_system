@@ -1,10 +1,13 @@
 package com.reviewsystem.review.user.entity;
 
 import com.reviewsystem.review.global.Entity.BaseEntity;
+import com.reviewsystem.review.matching.entity.TaskMatching;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -23,6 +26,10 @@ public class Customer extends BaseEntity {
     @JoinColumn(name = "user_id")
     @ToString.Exclude
     private User user;
+
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    @ToString.Exclude
+    private List<TaskMatching> taskMatchingList = new ArrayList<>();
 
     @Builder
     public Customer(Integer point, User user) {
