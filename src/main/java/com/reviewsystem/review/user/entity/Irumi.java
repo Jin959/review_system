@@ -1,6 +1,6 @@
 package com.reviewsystem.review.user.entity;
 
-import com.reviewsystem.review.global.Entity.BaseEntity;
+import com.reviewsystem.review.global.entity.BaseEntity;
 import com.reviewsystem.review.matching.entity.IrumiMatchingMapping;
 import com.reviewsystem.review.user.entity.ability.ProgramSkill;
 import com.reviewsystem.review.user.entity.ability.SoftSkill;

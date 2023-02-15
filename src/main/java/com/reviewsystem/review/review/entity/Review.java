@@ -1,6 +1,6 @@
 package com.reviewsystem.review.review.entity;
 
-import com.reviewsystem.review.global.Entity.BaseEntity;
+import com.reviewsystem.review.global.entity.BaseEntity;
 import com.reviewsystem.review.matching.entity.TaskMatching;
 import com.reviewsystem.review.review.entity.embeddable.Rating;
 import lombok.*;

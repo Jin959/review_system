@@ -1,6 +1,6 @@
 package com.reviewsystem.review.matching.entity;
 
-import com.reviewsystem.review.global.Entity.BaseEntity;
+import com.reviewsystem.review.global.entity.BaseEntity;
 import com.reviewsystem.review.matching.entity.embeddable.TaskMatchingField;
 import com.reviewsystem.review.matching.entity.embeddable.TaskMatchingTime;
 import com.reviewsystem.review.review.entity.Review;

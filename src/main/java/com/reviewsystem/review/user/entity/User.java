@@ -1,6 +1,6 @@
 package com.reviewsystem.review.user.entity;
 
-import com.reviewsystem.review.global.Entity.BaseEntity;
+import com.reviewsystem.review.global.entity.BaseEntity;
 import com.reviewsystem.review.user.entity.embeddable.Address;
 import com.reviewsystem.review.user.entity.embeddable.Agreement;
 import lombok.*;

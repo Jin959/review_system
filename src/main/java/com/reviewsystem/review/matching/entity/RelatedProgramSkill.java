@@ -1,6 +1,6 @@
 package com.reviewsystem.review.matching.entity;
 
-import com.reviewsystem.review.global.Entity.BaseEntity;
+import com.reviewsystem.review.global.entity.BaseEntity;
 import lombok.*;
 
 import javax.persistence.*;

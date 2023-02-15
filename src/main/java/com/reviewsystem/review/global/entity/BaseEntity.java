@@ -1,4 +1,4 @@
-package com.reviewsystem.review.global.Entity;
+package com.reviewsystem.review.global.entity;
 
 import lombok.Getter;
 import org.hibernate.annotations.CreationTimestamp;

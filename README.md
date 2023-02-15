@@ -89,13 +89,13 @@
 
 - `User` 엔터티는 `Irumi`, `Customer`와 `OneToOne` 매핑했다.
 
-- 연관 되는 필드를 묶어 `@Embeddable` 인 [Address](./src/main/java/com/reviewsystem/review/user/entity/Address.java), [Agreement](./blob/main/src/main/java/com/reviewsystem/review/user/entity/Agreement.java) 를 만들어 사용했다.
+- 연관 되는 필드를 묶어 `@Embeddable` 인 [Address](./src/main/java/com/reviewsystem/review/user/entity/Address.java), [Agreement](./src/main/java/com/reviewsystem/review/user/entity/Agreement.java) 를 만들어 사용했다.
 
 ### Irumi
 
 - `Irumi` 는 `TaskField`, `TaskSkill`, `SoftSkill`, `ProgramSkill` 네가지 역량과 `OneToOne` 매핑했다.
 
-- [네가지 역량 들](./src/main/java/com/reviewsystem/review/user/entity/Ability)은 같은 필드를 갖는다. 그 것들을 모아 놓은 [Ability](./blob/main/src/main/java/com/reviewsystem/review/user/entity/Ability/Ability.java)를 상속받는다.
+- [네가지 역량 들](./src/main/java/com/reviewsystem/review/user/entity/ability)은 같은 필드를 갖는다. 그 것들을 모아 놓은 [Ability](./src/main/java/com/reviewsystem/review/user/entity/ability/Ability.java)를 상속받는다.
 
 ### Customer
 
