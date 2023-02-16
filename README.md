@@ -38,29 +38,29 @@
   - 각 역량 들은 별개의 테이블로 두었다.
 
 - 하나의 이루미가 여러 역량을 지닐 수 있다.
-  - IRUMI : \[역량 테이블\] = 1:N
+  - `IRUMI` : `[역량 테이블]` = 1:N
 
 - 하나의 의뢰(매칭)에 여러 이루미를 사용 할 수 있다. 한 명의 이루미가 여러 번 매칭 될 수 있다.
-  -  TASK_MATCHING : IRUMI = N:M
+  -  `TASK_MATCHING` : `IRUMI` = N:M
   - JPA 엔터티 설계를 고려하여 매핑 테이블을 둔다.
-    - TASK_MATCHING : IRUMI_MATCHING_MAPPING : IRUMI 1:N:1
+    - `TASK_MATCHING` : `IRUMI_MATCHING_MAPPING` : IRUMI 1:N:1
 
 ### TASK_MATCHING
 
-- 고객이 업무를 등록하면 TASK_MATCHING 이 생성된다.
+- 고객이 업무를 등록하면 `TASK_MATCHING` 이 생성된다.
 
 - 하나의 고객이 여러 의뢰를 할 수 있다.
-  - CUSTOMER : TASK_MATCHING = 1 : N
+  - `CUSTOMER` : `TASK_MATCHING` = 1 : N
 
 - 의뢰의 업무 분야와 역량 들을 기준으로 이루미가 매칭된다.
 
-- 업무 매칭 여부를 나타내는 mached_status 가 있다.
+- 업무 매칭 여부를 나타내는 `mached_status` 가 있다.
 
 - 하나의 의뢰(매칭)가 여러 이루미와 매칭 될 수 있다. 한명의 이루미가 여러 매칭을 할 수 있다.
-  - TASK_MATCHING : IRUMI = N:M
+  - `TASK_MATCHING` : `IRUMI` = N:M
 
   - JPA 엔터티 설계를 고려하여 매핑 테이블을 둔다.
-  - TASK_MATCHING : IRUMI_MATCHING_MAPPING : IRUMI = 1:N:1
+  - `TASK_MATCHING` : `IRUMI_MATCHING_MAPPING` : `IRUMI` = 1:N:1
 
 
 ### REVIEW
@@ -78,9 +78,9 @@
 
   - `@NoArgsConstructor(access = AccessLevel.PROTECTED)`
 
-### RootEntity
+### BaseEntity
 
-모든 테이블에 공통적으로 존재하는 것들을 담는다. 모든 엔터티는 `RootEntity`를 상속 받는다.
+모든 테이블에 공통적으로 존재하는 것들을 담는다. 모든 엔터티는 `BaseEntity`를 상속 받는다.
 - `createTime`
 - `updateTime`
 - `deletionStatus`
@@ -100,16 +100,18 @@
 ### Customer
 
 - 고객은 리뷰를 작성할 수 있는 매칭 목록과 작성한 리뷰 목록을 볼 수 있어야 한다.
+
   - `Customer` 에서도 참조할 수 있게 양방향 매핑
+
   - `TaskMatching` 과 `OneToMany` 매핑을 둔다.
 
 ### TaskMatching
 
 - `Irumi`와 매핑 테이블을 두고 N:M 관계를 갖는다.
 
-- `Customer` 와
+- `Customer` 와 `ManyToOne`
 
-- 필요 역량들과 `OneToMany` 연관 관계
+- 업무 필요 역량들과 `OneToMany` 연관 관계
 
 - `Review` 와 `OneToOne` 연관 관계
 
@@ -140,9 +142,21 @@
 controller <-> service <-> repository(DAO)
 ```
 
+### 에러 핸들링
+
+- 
 ---
 
 ## 환경 설정
+
+### stack
+
+<img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white">
+<img src="https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=Spring&logoColor=white">
+<img src="https://img.shields.io/badge/Spring Boot-6DB33F?style=for-the-badge&logo=Spring Boot&logoColor=white">
+
+- H2 Database 또는 MySQL
+
 
 ### application.yml
 
@@ -153,7 +167,7 @@ spring:
 
   jpa:
     hibernate:      
-      ddl-auto: none #  개발, 테스팅 시 create / update
+      ddl-auto: none
     properties:
       hibernate:
         default_batch_fetch_size: 100 # 기본 배치사이즈 설정
@@ -175,3 +189,5 @@ spring:
 ## API Doc
 
 - [docs](./doc)
+
+- 처음에 Swagger를 사용하려고 했으나, Controller 단에 붙는 어노테이션 들이 코드를 알아보기 힘들게 하는 것같아 별도로 작성하기로 했다.

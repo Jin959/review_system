@@ -7,24 +7,20 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.MappedSuperclass;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.time.LocalDateTime;
 
 @Getter
 @MappedSuperclass
 public class BaseEntity {
     @CreationTimestamp
-    @NotNull
     private LocalDateTime createTime;
 
     @UpdateTimestamp
-    @NotNull
     private LocalDateTime updateTime;
 
-    @Enumerated(EnumType.STRING)
     @NotNull
-    @Size(max = 10)
+    @Enumerated(EnumType.STRING)
     protected DeletionStatus deletionStatus = DeletionStatus.UNDELETED;
 
     public enum DeletionStatus {

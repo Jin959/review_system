@@ -1,8 +1,8 @@
-package com.reviewsystem.review.matching.entity;
+package com.reviewsystem.review.matching.entity.matching;
 
 import com.reviewsystem.review.global.entity.BaseEntity;
-import com.reviewsystem.review.matching.entity.embeddable.TaskMatchingField;
-import com.reviewsystem.review.matching.entity.embeddable.TaskMatchingTime;
+import com.reviewsystem.review.matching.entity.IrumiMatchingMapping;
+import com.reviewsystem.review.matching.entity.RelatedTaskSkill;
 import com.reviewsystem.review.review.entity.Review;
 import com.reviewsystem.review.user.entity.Customer;
 import lombok.*;

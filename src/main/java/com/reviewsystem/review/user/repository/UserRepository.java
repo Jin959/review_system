@@ -1,13 +1,13 @@
 package com.reviewsystem.review.user.repository;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
+import com.reviewsystem.review.global.entity.BaseEntity;
+import com.reviewsystem.review.user.entity.user.User;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import javax.persistence.EntityManager;
+import java.util.Optional;
 
-@Repository
-@RequiredArgsConstructor
-public class UserRepository {
-    private final EntityManager em;
+public interface UserRepository extends JpaRepository<User, Long>  {
+    Optional<User> findByIdAndDeletionStatus(Long Id, BaseEntity.DeletionStatus undeleted);
 
+    Optional<User> findByEmailAndDeletionStatus(String email, BaseEntity.DeletionStatus undeleted);
 }

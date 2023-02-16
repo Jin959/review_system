@@ -6,6 +6,7 @@ import com.reviewsystem.review.user.entity.ability.ProgramSkill;
 import com.reviewsystem.review.user.entity.ability.SoftSkill;
 import com.reviewsystem.review.user.entity.ability.TaskField;
 import com.reviewsystem.review.user.entity.ability.TaskSkill;
+import com.reviewsystem.review.user.entity.user.User;
 import lombok.*;
 
 import javax.persistence.*;

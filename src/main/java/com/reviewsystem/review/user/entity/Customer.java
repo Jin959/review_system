@@ -1,7 +1,8 @@
 package com.reviewsystem.review.user.entity;
 
 import com.reviewsystem.review.global.entity.BaseEntity;
-import com.reviewsystem.review.matching.entity.TaskMatching;
+import com.reviewsystem.review.matching.entity.matching.TaskMatching;
+import com.reviewsystem.review.user.entity.user.User;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 

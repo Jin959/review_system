@@ -1,4 +1,4 @@
-package com.reviewsystem.review.user.entity.embeddable;
+package com.reviewsystem.review.review.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -14,16 +14,16 @@ import javax.validation.constraints.NotNull;
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
-public class Agreement {
+public class Rating {
     @NotNull
-    @ColumnDefault("1")
-    private Boolean serviceAgreement;
-
-    @NotNull
-    @ColumnDefault("1")
-    private Boolean personalDataAgreement;
+    @ColumnDefault("0")
+    private Integer taskSkillRating;
 
     @NotNull
     @ColumnDefault("0")
-    private Boolean marketingAgreement;
+    private Integer programSkillRating;
+
+    @NotNull
+    @ColumnDefault("0")
+    private Integer softSkillRating;
 }

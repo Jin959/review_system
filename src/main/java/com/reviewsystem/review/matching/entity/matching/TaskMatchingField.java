@@ -1,23 +1,26 @@
-package com.reviewsystem.review.matching.entity.embeddable;
+package com.reviewsystem.review.matching.entity.matching;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 @Embeddable
 @ToString
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
-public class TaskMatchingTime {
+public class TaskMatchingField {
     @NotNull
-    private LocalDateTime startingTime;
+    @Column(name = "task_field_category_big")
+    private String categoryBig;
+
     @NotNull
-    private LocalTime takingTime;
+    @Column(name = "task_field_category_small")
+    private String categorySmall;
+
 }
