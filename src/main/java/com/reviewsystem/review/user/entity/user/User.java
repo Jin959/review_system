@@ -24,6 +24,7 @@ import java.util.Optional;
 public class User extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false)
     private Long id;
 
     @NotNull
@@ -32,15 +33,15 @@ public class User extends BaseEntity {
 
     @Size(max = 200)
     @ColumnDefault("'OAUTH'")
+    @Column(nullable = false)
     private String password;
 
     @Size(max = 20)
     @ColumnDefault("'NONE'")
+    @Column(nullable = false)
     private String phone;
 
     @Embedded
-    @Valid
-    @NotNull
     private Agreement agreement;
 
     @Embedded
@@ -55,14 +56,17 @@ public class User extends BaseEntity {
     @Builder
     public User(String email, String password, String phone,
                 String state, String city, Boolean serviceAgreement,
-                Boolean personalDataAgreement, Boolean marketingAgreement,
-                OauthType oauthType) {
+                Boolean personalDataAgreement, Boolean marketingAgreement) {
         this.email = email;
         this.password = password;
         this.phone = phone;
-        this.agreement = new Agreement(serviceAgreement, personalDataAgreement, marketingAgreement);
+
+        this.agreement = new Agreement();
+        this.agreement.serviceAgreement = serviceAgreement;
+        this.agreement.personalDataAgreement = personalDataAgreement;
+        this.agreement.marketingAgreement = marketingAgreement;
+
         this.address = new Address(state, city);
-        Optional.ofNullable(oauthType).ifPresent((type) -> this.oauthType = type);
     }
 
     public void updateUserInfo(PatchUserInfoReq patchUserInfoReq) {

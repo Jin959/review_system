@@ -39,7 +39,6 @@ public class UserController {
             @PathVariable("userId") Long userId,
             @Validated @RequestBody PatchUserInfoReq patchUserInfoReq,
             BindingResult bindingResult) {
-
         if (bindingResult.hasErrors()) {
             return new ResponseDto<>(bindingResult);
         }
@@ -54,12 +53,10 @@ public class UserController {
             @PathVariable("userId") Long userId,
             @Validated @RequestBody PatchUserPasswordReq patchUserPasswordReq,
             BindingResult bindingResult) {
-
         if (bindingResult.hasErrors()) {
             return new ResponseDto<>(bindingResult);
         }
         userService.updateUserPassword(userId, patchUserPasswordReq);
-
         return new ResponseDto<String>("비밀번호가 변경되었습니다.");
     }
 
@@ -67,7 +64,64 @@ public class UserController {
     @DeleteMapping("/{userId}/delete")
     public ResponseDto<String> deleteUser(@PathVariable("userId") Long userId) {
         userService.deleteUser(userId);
-
         return new ResponseDto<String>("회원 탈퇴가 완료 되었습니다.");
+    }
+
+    @ResponseBody
+    @PostMapping("/{userId}/irumi/profile")
+    public ResponseDto<PostIrumiRes> createIrumiProfile(
+            @PathVariable("userId") Long userId,
+            @Validated @RequestBody PostIrumiReq postIrumiReq, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return new ResponseDto<>(bindingResult);
+        }
+        PostIrumiRes postIrumiRes = userService.createIrumiProfile(userId, postIrumiReq);
+        return new ResponseDto<>(postIrumiRes);
+    }
+
+    @ResponseBody
+    @GetMapping("irumies/{irumiId}/profile")
+    public ResponseDto<GetIrumiRes> getIrumiProfile(@PathVariable("irumiId") Long irumiId) {
+        GetIrumiRes getIrumiRes = userService.getIrumiProfile(irumiId);
+        return new ResponseDto<GetIrumiRes>(getIrumiRes);
+    }
+
+    @ResponseBody
+    @PatchMapping("irumies/{irumiId}/profile")
+    public ResponseDto<String> updateIrumiProfile(
+            @PathVariable("irumiId") Long irumiId, @RequestBody PatchIrumiReq patchIrumiReq) {
+        userService.updateIrumiProfile(irumiId, patchIrumiReq);
+        return new ResponseDto<String>("이루미 정보 수정에 성공하였습니다.");
+    }
+
+    @ResponseBody
+    @PostMapping("/irumies/{irumiId}/{ability}")
+    public ResponseDto<AbilityRes> createIrumiAbility(
+            @PathVariable("irumiId") Long irumiId, @PathVariable("ability") String ability,
+            @Validated @RequestBody AbilityReq abilityReq, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return new ResponseDto<>(bindingResult);
+        }
+        AbilityRes abilityRes = userService.createIrumiAbility(irumiId, ability.toLowerCase(), abilityReq);
+        return new ResponseDto<>(abilityRes);
+    }
+
+    @ResponseBody
+    @GetMapping("/irumies/{irumiId}/{ability}")
+    public ResponseDto<AbilityListDto> getIrumiAbility(
+            @PathVariable("irumiId") Long irumiId, @PathVariable("ability") String ability){
+        AbilityListDto abilityList = userService.getIrumiAbility(irumiId, ability.toLowerCase());
+        return new ResponseDto<>(abilityList);
+    }
+
+    @ResponseBody
+    @DeleteMapping("/irumies/{irumiId}/{ability}/{abilityId}")
+    public ResponseDto<String> createIrumiTaskField(
+            @PathVariable("irumiId") Long irumiId,
+            @PathVariable("ability") String ability,
+            @PathVariable("abilityId") Long abilityId) {
+        userService.deleteIrumiAbility(irumiId, ability.toLowerCase(), abilityId);
+
+        return new ResponseDto<>("역량이 삭제 되었습니다.");
     }
 }

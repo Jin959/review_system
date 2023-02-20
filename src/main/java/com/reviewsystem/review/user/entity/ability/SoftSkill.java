@@ -2,6 +2,7 @@ package com.reviewsystem.review.user.entity.ability;
 
 import com.reviewsystem.review.user.entity.Irumi;
 import lombok.*;
+import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
 
@@ -10,10 +11,8 @@ import javax.persistence.*;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@DynamicInsert
 public class SoftSkill extends Ability {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "irumi_id")

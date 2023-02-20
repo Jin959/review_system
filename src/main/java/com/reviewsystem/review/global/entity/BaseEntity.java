@@ -23,6 +23,10 @@ public class BaseEntity {
     @Enumerated(EnumType.STRING)
     protected DeletionStatus deletionStatus = DeletionStatus.UNDELETED;
 
+    public void deleteEntity() {
+        this.deletionStatus = DeletionStatus.DELETED;
+    }
+
     public enum DeletionStatus {
         DELETED, UNDELETED;
     }

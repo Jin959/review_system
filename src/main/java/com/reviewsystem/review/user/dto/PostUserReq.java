@@ -41,7 +41,7 @@ public class PostUserReq {
     @AssertTrue(message = "개인정보 이용약관에 동의해주세요.")
     private Boolean personalDataAgreement;
 
-    @NotNull(message = "마케팅 이용약관에 대한 선택을 해주세요.")
+//    @NotNull(message = "마케팅 이용약관에 대한 선택을 해주세요.")
     private Boolean marketingAgreement; // 선택동의
 
     @Size(max = 10, message = "행정 시,군이 너무 깁니다. 최대 10자 입니다.")

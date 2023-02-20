@@ -4,9 +4,8 @@ import com.reviewsystem.review.global.entity.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
 
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -15,7 +14,10 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @MappedSuperclass
 public class Ability extends BaseEntity {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false)
+    private Long id;
     @NotNull
     @Size(max = 20)
     private String categoryBig;
@@ -25,6 +27,11 @@ public class Ability extends BaseEntity {
     private String categorySmall;
 
     @NotNull
-    @ColumnDefault("0")
     private Integer rating;
+
+    public Ability(String categoryBig, String categorySmall, Integer rating) {
+        this.categoryBig = categoryBig;
+        this.categorySmall = categorySmall;
+        this.rating = rating;
+    }
 }
