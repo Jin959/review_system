@@ -3,6 +3,8 @@ package com.reviewsystem.review.global.exception;
 import com.reviewsystem.review.global.Response.ResponseDto;
 import com.reviewsystem.review.global.Response.ResponseHttpStatus;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -32,4 +34,13 @@ public class GlobalHandler {
         log.warn("ConstraintViolationException : ", exception);
         return new ResponseDto<>(BAD_REQ_ENTITY_VALIDATION);
     }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseDto<String> validationExceptionHandler(MethodArgumentNotValidException exception) {
+        log.warn("MethodArgumentNotValidException caught!!: {}", exception.getMessage());
+        log.warn("MethodArgumentNotValidException : ", exception);
+        BindingResult bindingResult = exception.getBindingResult();
+        return new ResponseDto<>(bindingResult);
+    }
+
 }

@@ -4,7 +4,6 @@ import com.reviewsystem.review.global.Response.ResponseDto;
 import com.reviewsystem.review.user.dto.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,10 +17,7 @@ public class UserController {
     @ResponseBody
     @PostMapping("/sign-up")
     public ResponseDto<PostUserRes> createUser(
-            @Validated @RequestBody PostUserReq postUserReq, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return new ResponseDto<>(bindingResult);
-        }
+            @Validated @RequestBody PostUserReq postUserReq) {
         PostUserRes postUserRes = userService.createUser(postUserReq);
         return new ResponseDto<>(postUserRes);
     }
@@ -37,11 +33,7 @@ public class UserController {
     @PatchMapping("/{userId}/info")
     public ResponseDto<String> updateUserInfo(
             @PathVariable("userId") Long userId,
-            @Validated @RequestBody PatchUserInfoReq patchUserInfoReq,
-            BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return new ResponseDto<>(bindingResult);
-        }
+            @Validated @RequestBody PatchUserInfoReq patchUserInfoReq) {
         userService.updateUserInfo(userId, patchUserInfoReq);
 
         return new ResponseDto<String>("유저 정보가 수정되었습니다.");
@@ -51,11 +43,7 @@ public class UserController {
     @PatchMapping("/{userId}/password")
     public ResponseDto<String> updateUserPassword(
             @PathVariable("userId") Long userId,
-            @Validated @RequestBody PatchUserPasswordReq patchUserPasswordReq,
-            BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return new ResponseDto<>(bindingResult);
-        }
+            @Validated @RequestBody PatchUserPasswordReq patchUserPasswordReq) {
         userService.updateUserPassword(userId, patchUserPasswordReq);
         return new ResponseDto<String>("비밀번호가 변경되었습니다.");
     }
@@ -71,10 +59,7 @@ public class UserController {
     @PostMapping("/{userId}/irumi/profile")
     public ResponseDto<PostIrumiRes> createIrumiProfile(
             @PathVariable("userId") Long userId,
-            @Validated @RequestBody PostIrumiReq postIrumiReq, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return new ResponseDto<>(bindingResult);
-        }
+            @Validated @RequestBody PostIrumiReq postIrumiReq) {
         PostIrumiRes postIrumiRes = userService.createIrumiProfile(userId, postIrumiReq);
         return new ResponseDto<>(postIrumiRes);
     }
@@ -98,10 +83,7 @@ public class UserController {
     @PostMapping("/irumies/{irumiId}/{ability}")
     public ResponseDto<AbilityRes> createIrumiAbility(
             @PathVariable("irumiId") Long irumiId, @PathVariable("ability") String ability,
-            @Validated @RequestBody AbilityReq abilityReq, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return new ResponseDto<>(bindingResult);
-        }
+            @Validated @RequestBody AbilityReq abilityReq) {
         AbilityRes abilityRes = userService.createIrumiAbility(irumiId, ability.toLowerCase(), abilityReq);
         return new ResponseDto<>(abilityRes);
     }
@@ -117,8 +99,7 @@ public class UserController {
     @ResponseBody
     @DeleteMapping("/irumies/{irumiId}/{ability}/{abilityId}")
     public ResponseDto<String> createIrumiTaskField(
-            @PathVariable("irumiId") Long irumiId,
-            @PathVariable("ability") String ability,
+            @PathVariable("irumiId") Long irumiId, @PathVariable("ability") String ability,
             @PathVariable("abilityId") Long abilityId) {
         userService.deleteIrumiAbility(irumiId, ability.toLowerCase(), abilityId);
 
